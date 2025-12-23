@@ -82,13 +82,13 @@ int main(int argc, char *argv[])
     // Get the command line options
     char *host = NULL;
     int port = 0;
-    char commands[512] = "";
+    char commands[8192] = "";
     const char *cmdfile = NULL;
     const char *csvfile = NULL;
     const char *tmplfile = NULL;
     const char *outfile = NULL;
-    char string[1024] = "";
-    char result[1024] = "";
+    char string[2048] = "";
+    char result[2048] = "";
     int sockfd;
     char dummylog[] = "\0";
     int opt;

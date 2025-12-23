@@ -1,21 +1,21 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <V-Control xmlns:vcontrol="http://www.openv.de/vcontrol">
   <unix>
     <config>
       <serial>
-        <tty>192.168.1.153:3002</tty>
+        <tty>/dev/ttyUSB0</tty>
       </serial>
       <net>
-         <!-- if no address is given, daemon will listen on all found interfaces -->
-         <!-- <listen>localhost</listen> -->
-          <port>3002</port>
+        <!-- if no address is given, daemon will listen on all found interfaces -->
+        <!-- <listen>localhost</listen> -->
+        <port>3002</port>
       </net>
       <logging>
         <file>/tmp/vcontrold.log</file>
         <syslog>n</syslog>
         <debug>n</debug>
       </logging>
-      <device ID="2053"/>
+      <device ID="2098"/>
     </config>
   </unix>
   <units>
@@ -53,6 +53,12 @@
       <abbrev>ST</abbrev>
       <calc get="V" set="V"/>
       <type>char</type>
+      <entity/>
+    </unit>
+    <unit name="UnsignedStatus">
+      <abbrev>UST</abbrev>
+      <calc get="V" set="V"/>
+      <type>uchar</type>
       <entity/>
     </unit>
     <unit name="Counter">
@@ -224,8 +230,39 @@
       <enum bytes="01" text="drehzahlgeregelt"/>
       <enum text="UNKNOWN"/>
     </unit>
+    <unit name="Umschaltventil Stellung">
+      <abbrev>USV</abbrev>
+      <type>enum</type>
+      <enum bytes="00" text="UNDEV"/>
+      <enum bytes="01" text="Heizen"/>
+      <enum bytes="02" text="Mittelstellung"/>
+      <enum bytes="03" text="Warmwasser"/>
+      <enum text="UNKNOWN"/>
+    </unit>
   </units>
   <protocols>
+    <protocol name="P300">
+      <pid>41</pid>
+      <macros>
+        <macro name="GETADDR">
+          <command>SEND 00 01</command>
+        </macro>
+        <macro name="SETADDR">
+          <command>SEND 00 02</command>
+        </macro>
+      </macros>
+      <commands>
+        <command name="getaddr">
+          <send>GETADDR $addr $hexlen;RECV $len $unit</send>
+        </command>
+        <command name="setaddr">
+          <send>SETADDR $addr $hexlen;SEND BYTES $unit;RECV 1 SR</send>
+        </command>
+        <command name="gettestaddr">
+          <send/>
+        </command>
+      </commands>
+    </protocol>
     <protocol name="KW2">
       <macros>
         <macro name="SYNC">

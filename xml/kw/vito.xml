@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <vito>
   <devices>
     <device ID="2098" name="V200KW2" protocol="KW2"/>
@@ -53,7 +53,7 @@
       </device>
     </command>
     <command name="getTempKsoll" protocmd="getaddr">
-      <addr>5502</addr>
+      <addr>555A</addr>
       <len>2</len>
       <unit>UT</unit>
       <error>05 05</error>
@@ -588,14 +588,13 @@
       <len>8</len>
       <unit>TI</unit>
       <description>Ermittle Systemzeit</description>
-      <device ID="2053"/>
+      <!--<device ID="2053"/>-->
     </command>
     <command name="setSystemTime" protocmd="setaddr">
       <addr>088E</addr>
       <len>8</len>
       <unit>TI</unit>
       <description>Setze Systemzeit</description>
-      <device ID="2053"/>
     </command>
     <command name="setTempWWsoll" protocmd="setaddr">
       <addr>6300</addr>
@@ -1114,6 +1113,79 @@
         <bit>5</bit>
         <unit>UT1</unit>
       </device>
+    </command>
+
+    <!-- CUSTOM -->
+
+    <command name="getTempRuecklauf" protocmd="getaddr">
+      <addr>080A</addr>
+      <len>2</len>
+      <unit>UT</unit>
+      <description>Ermittle die Ruecklauftemperature</description>
+    </command>
+
+
+    <command name="getTempAbgas" protocmd="getaddr">
+      <addr>0816</addr>
+      <len>2</len>
+      <unit>UT</unit>
+      <description>Ermittle die Abgastemperature</description>
+    </command>
+
+    <command name="getBrennerProzent" protocmd="getaddr">
+      <addr>55E3</addr>
+      <len>1</len>
+      <unit>PR1</unit>
+      <description>Ermittle die Leistung des Brenners in Prozent</description>
+    </command>
+
+    <command name="getStoerung" protocmd="getaddr">
+      <addr>0847</addr>
+      <len>1</len>
+      <unit>RT</unit>
+      <description>Ermittle den Stoerungzustand</description>
+    </command>
+
+    <command name="getBrennerStoerung" protocmd="getaddr">
+      <addr>0884</addr>
+      <len>1</len>
+      <unit>RT</unit>
+      <description>Ermittle den Brenner Stoerungzustand</description>
+    </command>
+
+    <command name="getBrennerStgFehlerstatus" protocmd="getaddr">
+      <addr>5738</addr>
+      <len>1</len>
+      <unit>UST</unit>
+      <description>Ermittle den Brennersteuergerät Fehlerstatus</description>
+    </command>
+
+    <command name="getBrennerStufe1" protocmd="getaddr">
+      <addr>0980</addr>
+      <len>1</len>
+      <unit>RT</unit>
+      <description>Ermittle den Brenner Stufe 1 Zustand</description>
+    </command>
+
+    <command name="getBrennerStufe2" protocmd="getaddr">
+      <addr>0981</addr>
+      <len>1</len>
+      <unit>RT</unit>
+      <description>Ermittle den Brenner Stufe 2 Zustand</description>
+    </command>
+
+    <command name="getBrennerLeistung" protocmd="getaddr">
+      <addr>A38F</addr>
+      <len>1</len>
+      <unit>PR</unit>
+      <description>Ermittle den Brennerleistung</description>
+    </command>
+
+    <command name="getBrennerMod" protocmd="getaddr">
+      <addr>55D3</addr>
+      <len>1</len>
+      <unit>PR1</unit>
+      <description>Ermittle den Brennermodulation</description>
     </command>
   </commands>
 </vito>
